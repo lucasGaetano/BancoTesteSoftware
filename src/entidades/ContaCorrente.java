@@ -21,6 +21,7 @@ public class ContaCorrente implements Conta {
 		if(saldo - valor < 0)
 			throw new IllegalArgumentException("Operação não permitida!");
 		this.saldo = saldo - valor;
+		this.saldo = saldo - 1.00;
 	}
 
 	@Override
@@ -30,7 +31,7 @@ public class ContaCorrente implements Conta {
 		if(valor > 3000)
 			throw new IllegalArgumentException("O limite do depósito é R$ 3.000,00");
 		this.saldo = saldo + valor;
-		
+		this.saldo = saldo - 1.00;
 	}
 
 }

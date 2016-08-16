@@ -18,6 +18,8 @@ public class ContaPoupanca implements Conta {
 
 	@Override
 	public void sacar(double valor) {
+		if(valor == 0)
+			throw new IllegalArgumentException("Não é premitido sacar valores iguais a zero");
 		if(valor < 0)
 			throw new IllegalArgumentException("Não é premitido sacar valores menores que zero");
 		if(saldo <= 0)

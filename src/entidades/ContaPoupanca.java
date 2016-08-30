@@ -26,6 +26,8 @@ public class ContaPoupanca implements Conta {
 			throw new IllegalArgumentException("Não tem saldo na conta");
 		if(saldo - valor < 0)
 			throw new IllegalArgumentException("Operação não permitida!");
+		if(valor > 3000)
+			throw new IllegalArgumentException("O limite do saque é R$ 3.000,00");
 		this.saldo = saldo - valor;
 	}
 

@@ -9,7 +9,7 @@ import org.junit.rules.ExpectedException;
 
 import entidades.ContaCorrente;
 
-public class TesteContaCorrente {
+public class TesteContaBase {
 	private ContaCorrente contaCorrente;
 	
 	@Rule
@@ -23,26 +23,40 @@ public class TesteContaCorrente {
 	@Test
 	public void saqueMaiorQueZeroMenorQueSaldoAtual() {
 		contaCorrente.sacar(10.0);
-		assertEquals(89.0,contaCorrente.saldo(),0.0001);
+		assertEquals(90.0,contaCorrente.saldo(),0.0001);
 	}
 	
 	@Test
 	public void saqueIgualAhZero() {
 		excecao.expect(IllegalArgumentException.class);
-		excecao.expectMessage("Não é premitido sacar valores iguais a zero");
+		excecao.expectMessage("Não é permitido sacar valores iguais a zero");
 		contaCorrente.sacar(0);
 	}
 	
 	@Test
 	public void saqueMenorQueZero() {
 		excecao.expect(IllegalArgumentException.class);
-		excecao.expectMessage("Não é premitido sacar valores menores que zero");
+		excecao.expectMessage("Não é permitido sacar valores menores que zero");
 		contaCorrente.sacar(-10.0);
 	}
 	
 	@Test
 	public void saqueValorAtualIgualAhZero() {
-	excecao.expect(IllegalArgumentException.class);
-	excecao.expectMessage("Não é premitido sacar valores iguais a zero");
-	contaCorrente.sacar(0);
+		excecao.expect(IllegalArgumentException.class);
+		excecao.expectMessage("Não é permitido sacar valores iguais a zero");
+		contaCorrente.sacar(0);
+	}
+	@Test
+	public void depositoAcimaDeCincoMil() {
+		excecao.expect(IllegalArgumentException.class);
+		excecao.expectMessage("O limite do depósito é R$ 5000.0");
+		contaCorrente.depositar(5000.01);
+	}
+	@Test
+	public void saqueAcimaDeCincoMil() {
+		contaCorrente = new ContaCorrente(6000.0);
+		excecao.expect(IllegalArgumentException.class);
+		excecao.expectMessage("O limite do saque é R$ 5000.0");
+		contaCorrente.sacar(5000.01);
+	}
 }

@@ -1,39 +1,42 @@
 package entidades;
 
 public class ContaCorrente implements Conta {
-	private double saldo;
+	private ContaBase base;
+	private double limite;
 
 	public ContaCorrente(double saldo) {
-		this.saldo = saldo;
+		this(saldo,5000.0);
 	}
 	
+	public ContaCorrente(double saldo, double limite) {
+		this(new ContaBase(saldo),limite);
+	}
+	
+	public ContaCorrente(ContaBase base, double limite) {
+		this.base = base;
+		this.limite = limite;
+	}
+
 	@Override
 	public double saldo() {
-		return saldo;
+		return base.saldo();
 	}
 
 	@Override
 	public void sacar(double valor) {
-		if(valor == 0)
-			throw new IllegalArgumentException("Não é premitido sacar valores iguais a zero");
-		if(valor < 0)
-			throw new IllegalArgumentException("Não é premitido sacar valores menores que zero");
-		if(saldo <= 0)
-			throw new IllegalArgumentException("Não tem saldo suficiente para o saque desejado");
-		if(saldo - valor < 0)
-			throw new IllegalArgumentException("Operação não permitida!");
-		this.saldo = saldo - valor;
-		this.saldo = saldo - 1.00;
+		
+		if(valor > limite)
+			throw new IllegalArgumentException("O limite do saque é R$ " + limite);
+		base.sacar(valor);
 	}
 
 	@Override
 	public void depositar(double valor) {
 		if(valor < 0)
-			throw new IllegalArgumentException("Não é premitido depositar valores menores que zero");
-		if(valor > 3000)
-			throw new IllegalArgumentException("O limite do depósito é R$ 3.000,00");
-		this.saldo = saldo + valor;
-		this.saldo = saldo - 1.00;
+			throw new IllegalArgumentException("Não é permitido depositar valores menores que zero");
+		if(valor > limite)
+			throw new IllegalArgumentException("O limite do depósito é R$ " + limite);
+		base.depositar(valor);
 	}
 
 }

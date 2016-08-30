@@ -7,43 +7,44 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
-import entidades.ContaCorrente;
+import entidades.Conta;
+import entidades.ContaBase;
 
 public class TesteContaBase {
-	private ContaCorrente contaCorrente;
+	private Conta contaBase;
 	
 	@Rule
 	public ExpectedException excecao = ExpectedException.none();;
 	
 	@Before
 	public void criaContaCorrente() {
-		contaCorrente = new ContaCorrente(100.00);
+		contaBase = new ContaBase(100.00);
 	}
 	
 	@Test
 	public void saqueMaiorQueZeroMenorQueSaldoAtual() {
-		contaCorrente.sacar(10.0);
-		assertEquals(90.0,contaCorrente.saldo(),0.0001);
+		contaBase.sacar(10.0);
+		assertEquals(90.0,contaBase.saldo(),0.0001);
 	}
 	
 	@Test
 	public void saqueIgualAhZero() {
 		excecao.expect(IllegalArgumentException.class);
 		excecao.expectMessage("Não é permitido sacar valores iguais a zero");
-		contaCorrente.sacar(0);
+		contaBase.sacar(0);
 	}
 	
 	@Test
 	public void saqueMenorQueZero() {
 		excecao.expect(IllegalArgumentException.class);
 		excecao.expectMessage("Não é permitido sacar valores menores que zero");
-		contaCorrente.sacar(-10.0);
+		contaBase.sacar(-10.0);
 	}
 	
 	@Test
 	public void saqueValorAtualIgualAhZero() {
 		excecao.expect(IllegalArgumentException.class);
 		excecao.expectMessage("Não é permitido sacar valores iguais a zero");
-		contaCorrente.sacar(0);
+		contaBase.sacar(0);
 	}
 }

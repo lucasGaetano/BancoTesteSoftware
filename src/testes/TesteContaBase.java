@@ -46,17 +46,4 @@ public class TesteContaBase {
 		excecao.expectMessage("Não é permitido sacar valores iguais a zero");
 		contaCorrente.sacar(0);
 	}
-	@Test
-	public void depositoAcimaDeCincoMil() {
-		excecao.expect(IllegalArgumentException.class);
-		excecao.expectMessage("O limite do depósito é R$ 5000.0");
-		contaCorrente.depositar(5000.01);
-	}
-	@Test
-	public void saqueAcimaDeCincoMil() {
-		contaCorrente = new ContaCorrente(6000.0);
-		excecao.expect(IllegalArgumentException.class);
-		excecao.expectMessage("O limite do saque é R$ 5000.0");
-		contaCorrente.sacar(5000.01);
-	}
 }

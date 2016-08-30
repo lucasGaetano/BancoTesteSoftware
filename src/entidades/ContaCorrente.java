@@ -19,7 +19,7 @@ public class ContaCorrente implements Conta {
 		if(valor < 0)
 			throw new IllegalArgumentException("Não é premitido sacar valores menores que zero");
 		if(saldo <= 0)
-			throw new IllegalArgumentException("Não tem saldo na conta");
+			throw new IllegalArgumentException("Não tem saldo suficiente para o saque desejado");
 		if(saldo - valor < 0)
 			throw new IllegalArgumentException("Operação não permitida!");
 		this.saldo = saldo - valor;

@@ -39,4 +39,10 @@ public class TesteContaCorrente {
 		excecao.expectMessage("Não é premitido sacar valores menores que zero");
 		contaCorrente.sacar(-10.0);
 	}
+	
+	@Test
+	public void saqueValorAtualIgualAhZero() {
+	excecao.expect(IllegalArgumentException.class);
+	excecao.expectMessage("Não é premitido sacar valores iguais a zero");
+	contaCorrente.sacar(0);
 }

@@ -8,7 +8,7 @@ import org.junit.rules.ExpectedException;
 import entidades.ContaCorrente;
 
 public class TesteContaCorrente {
-private ContaCorrente contaCorrente;
+	private ContaCorrente contaCorrente;
 	
 	@Rule
 	public ExpectedException excecao = ExpectedException.none();;
